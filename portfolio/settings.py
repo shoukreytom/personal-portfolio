@@ -1,6 +1,8 @@
 from pathlib import Path
+from decouple import config
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,10 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6^s_%blp219f-e6+&v-sxio#272!ncbs$*srfrrhera(rde8zy'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.path.exists(os.path.join(BASE_DIR, '.env')):
+    SECRET_KEY = config('SECRET_KEY')
+    DEBUG = config('DEBUG', cast=bool, default=False)
+
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    DEBUG = bool(os.environ.get('DEBUG_VALUE', False))
 
 ALLOWED_HOSTS = ['*']
 
@@ -110,3 +116,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+django_heroku.settings(locals())
