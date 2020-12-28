@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-if os.path.exists(os.path.join(BASE_DIR, '.env')):
+if os.path.exists(BASE_DIR / '.env'):
     SECRET_KEY = config('SECRET_KEY')
     DEBUG = config('DEBUG', cast=bool, default=False)
 
