@@ -5,9 +5,11 @@ from django.utils.text import slugify
 
 
 class Portfolio(models.Model):
+    TYPE_CHOICES = [('web', 'Web'), ('app', 'App')]
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, blank=True)
     image = models.ImageField(upload_to='portfolio-images')
+    port_type = models.CharField(max_length=100, choices=TYPE_CHOICES, default='web')
     description = models.TextField()
     url = models.URLField()
     created = models.DateTimeField(auto_now_add=True)
