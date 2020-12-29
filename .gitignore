@@ -5,3 +5,8 @@ portfolio-images/
 # Environment Files
 .env
 .env.example
+
+# databse files
+*.sqlite3
+*.db
+*.sql
