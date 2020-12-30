@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 if os.path.exists(BASE_DIR / '.env'):
     SECRET_KEY = config('SECRET_KEY')
-    DEBUG = config('DEBUG', cast=bool, default=False)
+    DEBUG = config('DEBUG', cast=bool, default=True)
 
 else:
     SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -116,5 +116,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+if os.path.exists(BASE_DIR / '.env'):
+    EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+else:
+    EMAIL_HOST_USER = os.environ("EMAIL_USER")
+    EMAIL_HOST_PASSWORD = os.environ("EMAIL_PASSWORD")
+
 
 django_heroku.settings(locals())
