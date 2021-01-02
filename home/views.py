@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseBadRequest, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse, Http404
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -17,7 +17,14 @@ def home(request):
     return render(request, "home/index.html", ctx)
 
 def portfolio_details(request, slug):
-    return render(request, "home/portfolio-details.html")
+    try:
+        portfolio = Portfolio.objects.get(slug=slug)
+    except Portfolio.DoesNotExist:
+        return Http404("This portfolio is not found")
+    ctx = {
+        'portfolio': portfolio,
+    }
+    return render(request, "home/portfolio-details.html", ctx)
 
 @csrf_exempt
 def send_email(request):
