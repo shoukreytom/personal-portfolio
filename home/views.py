@@ -6,11 +6,17 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
 
+from .models import Portfolio
+
 
 def home(request):
-    return render(request, "home/index.html")
+    portfolios = Portfolio.objects.all()
+    ctx = {
+        'portfolios': portfolios,
+    }
+    return render(request, "home/index.html", ctx)
 
-def portfolio_details(request, pk):
+def portfolio_details(request, slug):
     return render(request, "home/portfolio-details.html")
 
 @csrf_exempt
