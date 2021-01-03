@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from django.utils import timezone
 
 
 class Portfolio(models.Model):
@@ -12,8 +13,8 @@ class Portfolio(models.Model):
     port_type = models.CharField(max_length=100, choices=TYPE_CHOICES, default='web')
     description = models.TextField()
     url = models.URLField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
