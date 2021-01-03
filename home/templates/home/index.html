@@ -297,7 +297,7 @@
       <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
         {% for portfolio in portfolios %}
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+        <div class="col-lg-4 col-md-6 portfolio-item filter-{{ portfolio.port_type|lower }}">
           <div class="portfolio-wrap">
             <img src="{{ portfolio.image.url }}" class="img-fluid" alt="{{ portfolio.title }}">
             <div class="portfolio-info">
