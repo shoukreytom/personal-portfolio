@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseBadRequest, HttpResponse, Http404
+from django.http import HttpResponseBadRequest, HttpResponse, Http404, FileResponse
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -40,6 +40,9 @@ def send_email(request):
     else:
         return HttpResponse("<h1>bad request</h1>")
 
+def visit_cv(request):
+    book_url = "https://drive.google.com/file/d/19ej-R9QEhWGNOwNjTaZ10-ddfWKjQ5mo/view?usp=sharing"
+    return redirect(book_url)
 
 def error404(request, exception=None):
     return render(request, 'home/404.html')
