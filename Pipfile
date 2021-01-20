@@ -10,6 +10,7 @@ python-decouple = "*"
 django-heroku = "*"
 pillow = "*"
 django-b2 = "*"
+django-summernote = "*"
 
 [dev-packages]
 
