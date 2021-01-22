@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -140,5 +141,5 @@ else:
     EMAIL_HOST_USER = os.environ["EMAIL_USER"]
     EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
 
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 django_heroku.settings(locals())
