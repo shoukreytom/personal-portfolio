@@ -13,11 +13,19 @@ class Portfolio(models.Model):
     port_type = models.CharField(max_length=100, choices=TYPE_CHOICES, default='web')
     description = models.TextField()
     url = models.URLField()
-    created = models.DateTimeField(default=timezone.now)
-    updated = models.DateTimeField(default=timezone.now)
+    created = models.DateField(default=timezone.now)
+    updated = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.title
+
+class Screenshot(models.Model):
+    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='portfolio-screenshots')
+
+    def __str__(self):
+        return "<Screenshot <{}>>".format(str(self.portfolio))
+
 
 @receiver(post_save, sender=Portfolio)
 def save_slug(sender, instance=None, created=False, **kwargs):

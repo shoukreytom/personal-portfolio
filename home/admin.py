@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 
-from .models import Portfolio
+from .models import Portfolio, Screenshot
 
 
 class PortfolioAdmin(SummernoteModelAdmin, admin.ModelAdmin):
@@ -15,3 +15,4 @@ class PortfolioAdmin(SummernoteModelAdmin, admin.ModelAdmin):
 
 
 admin.site.register(Portfolio, PortfolioAdmin)
+admin.site.register(Screenshot)

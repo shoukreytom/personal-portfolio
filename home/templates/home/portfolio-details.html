@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - Kelly Bootstrap Template</title>
+  <title>{{ portfolio.title }}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -50,9 +50,9 @@
           <div class="col-lg-8">
             <h2 class="portfolio-title" style="text-transform: capitalize;">{{ portfolio.title }}</h2>
             <div class="owl-carousel portfolio-details-carousel">
-              <img src="{% static 'img/portfolio/portfolio-details-1.jpg' %}" class="img-fluid" alt="">
-              <img src="{% static 'assets/img/portfolio/portfolio-details-2.jpg' %}" class="img-fluid" alt="">
-              <img src="{% static 'assets/img/portfolio/portfolio-details-3.jpg' %}" class="img-fluid" alt="">
+              {% for screenshot in screenshots %}
+              <img src="{{ screenshot.image.url }}" class="img-fluid" alt="">
+              {% endfor %}
             </div>
           </div>
 
@@ -66,7 +66,7 @@
             </ul>
 
             <p>
-              {{ portfolio.description }}
+              {{ portfolio.description|escape }}
             </p>
           </div>
 

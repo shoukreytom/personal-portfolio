@@ -6,7 +6,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib import messages
 
-from .models import Portfolio
+from .models import Portfolio, Screenshot
 
 
 def home(request):
@@ -19,10 +19,12 @@ def home(request):
 def portfolio_details(request, slug):
     try:
         portfolio = Portfolio.objects.get(slug=slug)
+        screenshots = Screenshot.objects.filter(portfolio=portfolio)
     except Portfolio.DoesNotExist:
         return Http404("This portfolio is not found")
     ctx = {
         'portfolio': portfolio,
+        'screenshots': screenshots,
     }
     return render(request, "home/portfolio-details.html", ctx)
 
