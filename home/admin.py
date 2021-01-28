@@ -14,5 +14,9 @@ class PortfolioAdmin(SummernoteModelAdmin, admin.ModelAdmin):
     }
 
 
+class ScreenshotAdmin(admin.ModelAdmin):
+    list_filter = ['portfolio', ]
+
+
 admin.site.register(Portfolio, PortfolioAdmin)
-admin.site.register(Screenshot)
+admin.site.register(Screenshot, ScreenshotAdmin)
