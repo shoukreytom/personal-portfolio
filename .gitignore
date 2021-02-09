@@ -5,6 +5,7 @@ staticfiles/
 portfolio-images/
 
 # Environment Files
+env/
 .env
 .env.example
 
