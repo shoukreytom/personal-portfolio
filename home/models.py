@@ -1,23 +1,23 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.utils.text import slugify
+from autoslug import AutoSlugField
 from django.utils import timezone
 
 
 class Portfolio(models.Model):
     TYPE_CHOICES = [('web', 'Web'), ('app', 'App')]
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, blank=True)
+    slug = AutoSlugField(populate_from='title', unique_with='update__month')
     image = models.ImageField(upload_to='portfolio-images')
     port_type = models.CharField(max_length=100, choices=TYPE_CHOICES, default='web')
     description = models.TextField()
-    url = models.URLField()
+    live_url = models.URLField(null=True, blank=True)
+    source_url = models.URLField(null=True, blank=True)
     created = models.DateField(default=timezone.now)
     updated = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.title
+
 
 class Screenshot(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
@@ -25,11 +25,3 @@ class Screenshot(models.Model):
 
     def __str__(self):
         return "<Screenshot <{}>>".format(str(self.portfolio))
-
-
-@receiver(post_save, sender=Portfolio)
-def save_slug(sender, instance=None, created=False, **kwargs):
-    if created:
-        instance.slug = slugify(instance.title)
-        instance.save()
-
