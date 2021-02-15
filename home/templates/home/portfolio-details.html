@@ -62,7 +62,12 @@
               <li><strong>Category</strong>: {{ portfolio.port_type }}</li>
               <!-- <li><strong>Client</strong>: ASU Company</li> -->
               <li><strong>Project date</strong>: {{ portfolio.created }}</li>
-              <li><strong>Project URL</strong>: <a href="{{ portfolio.url }}">{{ portfolio.url }}</a></li>
+			  {% if portfolio.live_url %}
+              <li><strong>Live Demo</strong>: <a href="{{ portfolio.url }}">{{ portfolio.live_url }}</a></li>
+			  {% endif %}
+			  {% if portfolio.source_url %}
+			  <li><strong>Source Code</strong>: <a href="{{ portfolio.url }}">{{ portfolio.source }}</a></li>
+			  {% endif %}
             </ul>
 
             <p>
