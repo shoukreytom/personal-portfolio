@@ -10,5 +10,5 @@ urlpatterns = [
     path('feedback/send_mail/', views.send_email, name='send-email'),
     path('visit/cv/', views.visit_cv, name='visit-cv'),
 ]
-if not settings.DEBUG:
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
