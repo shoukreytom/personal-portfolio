@@ -6,7 +6,7 @@ from django.utils import timezone
 class Portfolio(models.Model):
     TYPE_CHOICES = [('web', 'Web'), ('app', 'App')]
     title = models.CharField(max_length=250)
-    slug = AutoSlugField(populate_from='title', unique_with='update__month')
+    slug = AutoSlugField(populate_from='title', unique_with='updated__month')
     image = models.ImageField(upload_to='portfolio-images')
     port_type = models.CharField(max_length=100, choices=TYPE_CHOICES, default='web')
     description = models.TextField()

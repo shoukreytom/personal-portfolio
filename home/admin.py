@@ -9,9 +9,6 @@ class PortfolioAdmin(SummernoteModelAdmin, admin.ModelAdmin):
     list_display = ['title', 'description', 'live_url', 'source_url', 'port_type']
     list_filter = ['created', 'updated']
     search_fields = ['title', 'description']
-    prepopulated_fields = {
-        'slug': ['title']
-    }
 
 
 class ScreenshotAdmin(admin.ModelAdmin):
