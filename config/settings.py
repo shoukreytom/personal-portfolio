@@ -121,12 +121,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# blackblaze storage
-DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'
-B2_APP_KEY_ID = os.environ.get('B2_KEY_ID')
-B2_APP_KEY = os.environ.get('B2_KEY')
-B2_BUCKET_NAME = 'portfolio-shoukrey'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -135,9 +129,15 @@ EMAIL_PORT = 587
 
 
 if os.path.exists(BASE_DIR / '.env'):
-    EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+    pass
+    # EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+    # EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 else:
+    # blackblaze storage
+    DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'
+    B2_APP_KEY_ID = os.environ.get('B2_KEY_ID')
+    B2_APP_KEY = os.environ.get('B2_KEY')
+    B2_BUCKET_NAME = 'portfolio-shoukrey'
     EMAIL_HOST_USER = os.environ["EMAIL_USER"]
     EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
 
