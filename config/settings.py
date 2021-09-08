@@ -132,11 +132,11 @@ if os.path.exists(BASE_DIR / '.env'):
     EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 else:
     # cloudinary storage
-    cloudinary.config( 
-      cloud_name = os.environ["CLOUD_NAME"], 
-      api_key = os.environ["API_KEY"], 
-      api_secret = os.environ["API_SECRET"] 
-    )
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.environ["CLOUD_NAME"],
+        'API_KEY': os.environ["API_KEY"],
+        'API_SECRET': os.environ["API_SECRET"]
+    }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
     # email config
     EMAIL_HOST_USER = os.environ["EMAIL_USER"]
