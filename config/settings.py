@@ -1,3 +1,5 @@
+import cloudinary
+import cloudinary_storage
 from pathlib import Path
 from decouple import config
 
@@ -10,7 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if os.path.exists(BASE_DIR / '.env'):
     SECRET_KEY = config('SECRET_KEY')
     DEBUG = config('DEBUG', cast=bool, default=True)
-
 else:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     DEBUG = (os.environ.get('DEBUG_VALUE') == "True")
@@ -30,6 +31,8 @@ INSTALLED_APPS = [
     'portfolio.apps.PortfolioConfig',
     'rest_framework',
     'corsheaders',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -128,11 +131,14 @@ if os.path.exists(BASE_DIR / '.env'):
     EMAIL_HOST_USER = config("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 else:
-    # blackblaze storage
-    DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'
-    B2_APP_KEY_ID = os.environ.get('B2_KEY_ID')
-    B2_APP_KEY = os.environ.get('B2_KEY')
-    B2_BUCKET_NAME = 'portfolio-shoukrey'
+    # cloudinary storage
+    cloudinary.config( 
+      cloud_name = os.environ["CLOUD_NAME"], 
+      api_key = os.environ["API_KEY"], 
+      api_secret = os.environ["API_SECRET"] 
+    )
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    # email config
     EMAIL_HOST_USER = os.environ["EMAIL_USER"]
     EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASSWORD"]
 

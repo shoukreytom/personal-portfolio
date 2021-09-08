@@ -32,6 +32,8 @@ Pillow = "==8.1.0"
 Django = "==3.1.6"
 djangorestframework = "*"
 django-cors-headers = "*"
+cloudinary = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 
