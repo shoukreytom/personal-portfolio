@@ -7,12 +7,6 @@ import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-
 if os.path.exists(BASE_DIR / '.env'):
     SECRET_KEY = config('SECRET_KEY')
     DEBUG = config('DEBUG', cast=bool, default=True)
@@ -33,8 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig',
-    'django_summernote',
+    'portfolio.apps.PortfolioConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -129,9 +123,8 @@ EMAIL_PORT = 587
 
 
 if os.path.exists(BASE_DIR / '.env'):
-    pass
-    # EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-    # EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+    EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 else:
     # blackblaze storage
     DEFAULT_FILE_STORAGE = 'django_b2.storage.B2Storage'
