@@ -12,11 +12,18 @@ class Portfolio(models.Model):
     description = models.TextField()
     live_url = models.URLField(null=True, blank=True)
     source_url = models.URLField(null=True, blank=True)
+    tools = models.ManyToManyField('Tool', related_name='tools')
     created = models.DateField(default=timezone.now)
     updated = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.title
+
+class Tool(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
 class Screenshot(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from portfolio.models import Portfolio, Screenshot
+from portfolio.models import Portfolio, Screenshot, Tool
 
 
 class EmbeddedScreenshot(admin.TabularInline):
@@ -19,3 +19,5 @@ class PortfolioAdmin(admin.ModelAdmin):
 class ScreenshotAdmin(admin.ModelAdmin):
     list_filter = ['portfolio', ]
 
+
+admin.site.register(Tool)
